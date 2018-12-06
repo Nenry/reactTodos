@@ -19,6 +19,49 @@ export default class Todo extends React.Component {
     this.setState({newTodo:  ''});
   }
 
+  
+
+  updateUp() {
+    const newList = [];
+    this.state.todos.forEach((todo, idx) => {
+      if (todo.clicked) {
+        newList.push({title: todo.title, status: todo.status - 1 < 0 ? 0 : todo.status - 1, clicked: todo.clicked})
+      } else {
+        newList.push(todo);
+      }
+    });
+
+    this.setState({todos: newList});
+  }
+
+  updateDown() {
+    const newList = [];
+    this.state.todos.forEach((todo, idx) => {
+      if (todo.clicked) {
+        newList.push({title: todo.title, status: todo.status + 1 > 2 ? todo.status : todo.status + 1, clicked: todo.clicked})
+      } else {
+        newList.push(todo);
+      }
+    });
+
+    this.setState({todos: newList});
+  }
+
+  deleteTodo() {
+        const newList = [];
+        this.state.todos.forEach((todo, idx) => {
+          if (!todo.clicked) {
+            newList.push(todo);
+          }
+        });
+
+        this.setState({
+          todos: newList
+        });
+  }
+
+
+
   highlight(idx1) {
     const updatedList = [];
     this.state.todos.forEach((todo, idx2) => {
@@ -35,18 +78,58 @@ export default class Todo extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='todo-wrapper'>
+          <div>
+            <button onClick={() => this.updateUp()}>Progress Up</button>
+            <button onClick={() => this.updateDown()}>Progress Down</button>
+            <button onClick={() => this.deleteTodo()}>Delete</button>
+          </div>
+
+          <div>
+
+            <div>New</div>
+            <ul>
+              {this.state.todos.map((todo, idx) => {
+                if (todo.status === 0) {   
+                  return (
+                    <li className={todo.clicked ? 'highlight' : ''} onClick={() => this.highlight(idx)} key={idx}>{todo.title}</li>
+                    );
+                  }    
+                })}
+            </ul>
+          </div>
+
+          <div>
+
+          <div>In progress</div>
+          <ul>
+
+          {this.state.todos.map((todo, idx) => {
+            if (todo.status === 1) {   
+              return (
+                <li className={todo.clicked ? 'highlight' : ''} onClick={() => this.highlight(idx)} key={idx}>{todo.title}</li>
+                );
+              } 
+              
+            })}
+          </ul>
         
-        <div>New</div>
-        <ul>
-        {this.state.todos.map((todo, idx) => <li className={todo.clicked ? 'highlight' : ''} onClick={() => this.highlight(idx)} key={idx}>{todo.title}</li>)}
+        </div>
+        
+        <div>
+
+          <div>Completed</div>
+          <ul>
+          {this.state.todos.map((todo, idx) => {
+            if (todo.status === 2) {   
+              return (
+                <li className={todo.clicked ? 'highlight' : ''} onClick={() => this.highlight(idx)} key={idx}>{todo.title}</li>
+                );
+              } 
+              
+            })}
         </ul>
-        <button>Right</button>
-        <button>Left</button>
-        <div>In progress</div>
-        <button>Right</button>
-        <button>Left</button>
-        <div>Completed</div>
+        </div>
 
         
           <input type='text' onChange= {(e) => this.handleChange(e)} value={this.state.newTodo}></input>
