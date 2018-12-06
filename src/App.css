@@ -38,7 +38,7 @@
 
 .todo-body {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
   width: 100%;
   /* text-align: start; */
   
@@ -52,12 +52,12 @@
 li {
   word-wrap: break-word;
   white-space: pre-line;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
-div {
+/* div {
   word-wrap: break-word;
   white-space: pre-line;
-}
+} */
 
 @keyframes App-logo-spin {
   from {
