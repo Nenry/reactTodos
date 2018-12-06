@@ -26,6 +26,38 @@
   background-color: rgb(94, 185, 207);
 }
 
+.todo-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: center;
+  /* align-items: center; */
+  
+  margin: 0 auto;
+}
+
+.todo-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  /* text-align: start; */
+  
+}
+
+.todo {
+  width: 100%;
+
+}
+
+li {
+  word-wrap: break-word;
+  white-space: pre-line;
+  overflow: scroll;
+}
+div {
+  word-wrap: break-word;
+  white-space: pre-line;
+}
 
 @keyframes App-logo-spin {
   from {
