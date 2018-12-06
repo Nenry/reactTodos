@@ -22,6 +22,10 @@
   color: #61dafb;
 }
 
+.highlight {
+  background-color: rgb(94, 185, 207);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
