@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
 
-          <Todo hello='hi'/>
+          <Todo />
 
 
     );
